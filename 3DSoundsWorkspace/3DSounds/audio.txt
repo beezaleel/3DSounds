@@ -1,0 +1,5 @@
+audio1 ./assets/sounds/audio1.mp3
+audio2 ./assets/sounds/audio2.mp3
+audio3 ./assets/sounds/audio3.mp3
+audio4 ./assets/sounds/audio4.mp3
+audio5 ./assets/sounds/audio5.mp3

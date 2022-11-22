@@ -1,0 +1,7 @@
+assets/models/west_town.ply
+WestTown
+assets/models/speaker.ply
+Speaker
+assets/models/sphere1.ply
+ISOSphere1
+EOF
