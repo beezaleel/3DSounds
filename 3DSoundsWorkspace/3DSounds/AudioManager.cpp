@@ -143,7 +143,7 @@ bool AudioManager::PlaySound(const std::string& soundName, const std::string& ch
 	return true;
 }
 
-bool AudioManager::tick(const glm::vec3& cameraPosition)
+bool AudioManager::Tick(const glm::vec3& cameraPosition)
 {
 	assert(fmodSystem_ && "no system object");
 
@@ -271,8 +271,6 @@ bool AudioManager::PlaySound(const std::string& soundName, glm::vec3 position, f
 		return false;
 	}
 
-	//min distance to hear @ max volume
-	//max distance where the attenuation stops
 	if (!isOkay((*channel)->set3DMinMaxDistance(maxDistance, 10000.0f)))
 	{
 		return false;

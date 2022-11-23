@@ -374,9 +374,6 @@ int main(void)
     LightHelper* pLightHelper = new LightHelper();
     ::gLightManager->LoadLightUniformLocations(shaderID);
     
-
-    //::gLightManager->vLights[0].position = glm::vec4(-10.0f, -10.0f, -320.0f, 1.0f);
-    //::gLightManager->vLights[0].position = glm::vec4(30.0f, 155.0f, 25.0f, 1.0f);
     ::gLightManager->vLights[0].position = glm::vec4(-109.0f, 863.0f, 116.0f, 1.0f);
     ::gLightManager->vLights[0].diffuse = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     ::gLightManager->vLights[0].atten = glm::vec4(0.01f, 0.001f, 0.000001f, 1.0f);
@@ -405,7 +402,6 @@ int main(void)
     pSpeakerFrontLeft->scale = 3.4f;
     pSpeakerFrontLeft->position = glm::vec4(398.0f, 30.0f, 566.0f, 1);
     pSpeakerFrontLeft->velocity = glm::vec3(0.0f, 0.0f, -2.5f);
-
     FMOD::Channel* channel1;
     audioManager->PlaySound("audio1", pSpeakerFrontLeft->position, 0.9f, &channel1);
     pSpeakerFrontLeft->attachedSound = channel1;
@@ -418,7 +414,6 @@ int main(void)
     pSpeakerFrontRight->scale = 3.4f;
     pSpeakerFrontRight->position = glm::vec4(-526, 30.0f, 470, 1);
     pSpeakerFrontRight->velocity = glm::vec3(0.0f, 0.0f, 2.5f);
-
     FMOD::Channel* channel2;
     audioManager->PlaySound("audio2", pSpeakerFrontRight->position, 0.9f, &channel2);
     pSpeakerFrontRight->attachedSound = channel2;
@@ -431,7 +426,6 @@ int main(void)
     pSpeakerRareRight->scale = 3.4f;
     pSpeakerRareRight->position = glm::vec4(-568, 30.0f, -514, 1);
     pSpeakerRareRight->velocity = glm::vec3(-1.0f, 0.0f, 0.5f);
-
     FMOD::Channel* channel3;
     audioManager->PlaySound("audio3", pSpeakerRareRight->position, 0.9f, &channel3);
     pSpeakerRareRight->attachedSound = channel3;
@@ -444,7 +438,6 @@ int main(void)
     pSpeakerRareLeft->scale = 3.4f;
     pSpeakerRareLeft->position = glm::vec4(-112, 30.0f, -550, 1);
     pSpeakerRareLeft->velocity = glm::vec3(-1.0f, 0.0f, -0.5f);
-
     FMOD::Channel* channel4;
     audioManager->PlaySound("audio4", pSpeakerRareLeft->position, 0.9f, &channel4);
     pSpeakerRareLeft->attachedSound = channel4;
@@ -457,7 +450,6 @@ int main(void)
     pSpeakerCenter->scale = 3.4f;
     pSpeakerCenter->position = glm::vec4(-174, 30.0f, -130, 1);
     pSpeakerCenter->velocity = glm::vec3(0.0f, 0.0f, 2.0f);
-
     FMOD::Channel* channel5;
     audioManager->PlaySound("audio5", pSpeakerCenter->position, 0.3f, &channel5);
     pSpeakerCenter->attachedSound = channel5;
@@ -471,16 +463,13 @@ int main(void)
     pDebugSphere_1->RGBAColour = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     pDebugSphere_1->isWireframe = true;
     pDebugSphere_1->scale = 1.0f;
-
     pDebugSphere_1->bDoNotLight = true;
-
     vec_pMeshObjects.push_back(pDebugSphere_1);
 
     GLint mvp_location = glGetUniformLocation(shaderID, "MVP");
     GLint mModel_location = glGetUniformLocation(shaderID, "mModel");
     GLint mView_location = glGetUniformLocation(shaderID, "mView");
     GLint mProjection_location = glGetUniformLocation(shaderID, "mProjection");
-    // Need this for lighting
     GLint mModelInverseTransform_location = glGetUniformLocation(shaderID, "mModelInverseTranspose");
 
     while (!glfwWindowShouldClose(window))
@@ -488,7 +477,7 @@ int main(void)
         pDebugSphere_1->position = glm::vec3(::gLightManager->vLights[0].position);
 
         float distance10percent = pLightHelper->CalcApproxDistFromAtten(
-            0.1f,  // 10%
+            0.1f,
             0.001f,
             100000.0f,
             ::gLightManager->vLights[0].atten.x,
@@ -496,7 +485,7 @@ int main(void)
             ::gLightManager->vLights[0].atten.z);
 
         ::gLightManager->CopyLightInformationToShader(shaderID);
-        audioManager->tick(::gCameraEye);
+        audioManager->Tick(::gCameraEye);
 
         float ratio;
         int width, height;
@@ -510,10 +499,8 @@ int main(void)
 
         glViewport(0, 0, width, height);
 
-        // note the binary OR (not the usual boolean "or" comparison)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Using sea level background color
         glClearColor(0.0f, 0.37f, 0.72f, 1.0f);
 
         glm::vec3 upVector = glm::vec3(0.0f, 1.0f, 0.0f);

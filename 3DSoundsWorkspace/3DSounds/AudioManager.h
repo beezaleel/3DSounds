@@ -34,7 +34,7 @@ public:
 	bool UnloadSound(const std::string& name);
 	bool PlaySound(const std::string& name);
 	bool PlaySound(const std::string& soundName, const std::string& channelGroupName);
-	bool tick(const glm::vec3& cameraPosition);
+	bool Tick(const glm::vec3& cameraPosition);
 
 	bool LoadChannelGroup(const std::string& name);
 	bool UnloadChannelGroup(const std::string& name);
